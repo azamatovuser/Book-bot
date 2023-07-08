@@ -18,8 +18,7 @@ async def bot_start(message: types.Message):
         "username": username,
         "full_name": full_name,
     }
-    rs = requests.post(url=f"{BASE_URL}user/list_create/", data=data)
-    print(rs)
+    requests.post(url=f"{BASE_URL}user/list_create/", data=data)
     is_subscribed = await subscription.check(user_id=telegram_id, channel=CHANNELS[0])
     if is_subscribed:
         await message.answer(f"Assalomu alaykum {message.from_user.full_name}!", reply_markup=main_button)
