@@ -24,7 +24,7 @@ async def back(message: types.Message):
     await message.answer(f"Orqaga qaytdingiz", reply_markup=main_button)
 
 
-@dp.message_handler()
+@dp.message_handler(content_types='text')
 async def handle_book_request(message: types.Message):
     temporary_response = await message.answer("Kitob qidirilmoqda..")
     book_title = message.text
