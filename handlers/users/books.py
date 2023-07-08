@@ -5,6 +5,7 @@ import requests
 from data.config import BASE_URL
 from keyboards.default.main_button import main_button
 from requests.exceptions import RequestException
+import asyncio
 
 
 @dp.message_handler(text='Kitoblar')
@@ -25,6 +26,7 @@ async def back(message: types.Message):
 
 @dp.message_handler()
 async def handle_book_request(message: types.Message):
+    temporary_response = await message.answer("Kitob qidirilmoqda..")
     book_title = message.text
     url = f"{BASE_URL}book/detail/"
     params = {'title': book_title}
@@ -36,9 +38,13 @@ async def handle_book_request(message: types.Message):
             file_path = data.get('file')
             with open(file_path, 'rb') as file:
                 await bot.send_document(message.chat.id, file, caption=book_title)
+            await temporary_response.delete()
         elif response.status_code == 404:
-            await message.reply("Book not found.")
+            await asyncio.sleep(2)
+            await bot.edit_message_text(chat_id=message.chat.id, message_id=temporary_response.message_id, text="Bizning ma'lumot omborimizda bunday kitob mavjud emas")
         else:
-            await message.reply("Error occurred while retrieving the book.")
+            await temporary_response.delete()
+            await bot.edit_message_text(chat_id=message.chat.id, message_id=temporary_response.message_id, text='Tizimda xatolik, iltimos oz vaqt kuting')
     except RequestException:
-        await message.reply("Error occurred while making the API request.")
+        await temporary_response.delete()
+        await bot.edit_message_text(chat_id=message.chat.id, message_id=temporary_response.message_id, text='Tizimda xatolik, iltimos oz vaqt kuting')
