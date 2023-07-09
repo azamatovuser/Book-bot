@@ -6,7 +6,7 @@ from loader import dp
 
 @dp.message_handler(CommandHelp())
 async def bot_help(message: types.Message):
-    text = ("Список команд: ",
+    text = ("Yordam beruvchi komandalar: ",
             "/start - Ishga tushurish",
             "/help - Yordam",
             "/send_post - Reklama berish",
