@@ -8,5 +8,4 @@ BOT_TOKEN = env.str("BOT_TOKEN")
 ADMINS = env.list("ADMINS")
 IP = env.str("ip")
 BASE_URL = env.str("BASE_URL")
-CHANNELS = ['-1001852213398']
-BOT_ID = os.environ.get('BOT_ID')
+CHANNELS = ['-1001901250549']

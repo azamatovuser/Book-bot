@@ -1,5 +1,4 @@
 from aiogram import types
-from aiogram.dispatcher.filters.builtin import CommandStart
 from keyboards.default.main_button import main_button
 import requests
 from loader import dp, bot
@@ -8,7 +7,7 @@ from utils.misc import subscription
 from keyboards.inline.subscription import check_button
 
 
-@dp.message_handler(CommandStart())
+@dp.message_handler(commands='start')
 async def bot_start(message: types.Message):
     telegram_id = message.from_user.id
     username = message.from_user.username
