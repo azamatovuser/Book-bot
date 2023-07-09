@@ -21,7 +21,7 @@ async def bot_start(message: types.Message):
     requests.post(url=f"{BASE_URL}user/list_create/", data=data)
     is_subscribed = await subscription.check(user_id=telegram_id, channel=CHANNELS[0])
     if is_subscribed:
-        await message.answer(f"Assalomu alaykum {message.from_user.full_name}!", reply_markup=main_button)
+        await message.answer(f"Assalomu alaykum {message.from_user.full_name}! 🚀", reply_markup=main_button)
     else:
         channels_format = str()
         for channel in CHANNELS:
@@ -44,7 +44,7 @@ async def checker(call: types.CallbackQuery):
         channel = await bot.get_chat(channel)
         if status:
             await call.message.delete()
-            await call.message.answer(f"Assalomu alaykum {call.from_user.full_name}!", reply_markup=main_button)
+            await call.message.answer(f"Assalomu alaykum {call.from_user.full_name}! 🚀", reply_markup=main_button)
         else:
             invite_link = await channel.export_invite_link()
             result += (f"<b>{channel.title}</b> kanaliga obuna bo'lmagansiz. "

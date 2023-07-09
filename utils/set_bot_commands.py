@@ -6,5 +6,7 @@ async def set_default_commands(dp):
         [
             types.BotCommand("start", "Ishga tushurish"),
             types.BotCommand("help", "Yordam"),
+            types.BotCommand("send_post", "Reklama berish"),
+            types.BotCommand("/statistic", "Kanalni statistikasi"),
         ]
     )

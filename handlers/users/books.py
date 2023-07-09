@@ -1,6 +1,6 @@
 from aiogram import types
 from loader import dp, bot
-from aiogram.types import ReplyKeyboardMarkup, ReplyKeyboardRemove
+from aiogram.types import ReplyKeyboardMarkup
 import requests
 from data.config import BASE_URL
 from keyboards.default.main_button import main_button
@@ -8,25 +8,25 @@ from requests.exceptions import RequestException
 import asyncio
 
 
-@dp.message_handler(text='Kitoblar')
+@dp.message_handler(text='Kitoblar 📚')
 async def list(message: types.Message):
     books = ReplyKeyboardMarkup(resize_keyboard=True)
     rs = requests.get(url=f"{BASE_URL}book/list/")
     data = rs.json()
     for book in data:
         books.add(book['title'])
-    books.add('Menu')
-    await message.answer(f"Qaysi kitobni tanlaysiz?", reply_markup=books)
+    books.add('Menu ⬅️')
+    await message.answer(f"Qaysi kitobni tanlaysiz? 🤔", reply_markup=books)
 
 
-@dp.message_handler(text='Menu')
+@dp.message_handler(text='Menu ⬅️')
 async def back(message: types.Message):
-    await message.answer(f"Orqaga qaytdingiz", reply_markup=main_button)
+    await message.answer(f"Orqaga qaytdingiz ✅", reply_markup=main_button)
 
 
-@dp.message_handler(content_types='text')
+@dp.message_handler()
 async def handle_book_request(message: types.Message):
-    temporary_response = await message.answer("Kitob qidirilmoqda..")
+    temporary_response = await message.answer("Kitob qidirilmoqda 🔎")
     book_title = message.text
     url = f"{BASE_URL}book/detail/"
     params = {'title': book_title}
